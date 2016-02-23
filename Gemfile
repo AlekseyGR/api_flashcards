@@ -13,6 +13,11 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+group :development do
+  gem 'rubocop', require: false
+  gem 'quiet_assets'
+end
+
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
