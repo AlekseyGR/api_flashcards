@@ -12,7 +12,7 @@ module ApiFlashcards
         if auth
           @current_user = auth
         else
-          render json: { message: 'Authentication failed', status: 401 }
+          render json: { message: 'Authentication failed'}, status: 401
         end
       end
     end
