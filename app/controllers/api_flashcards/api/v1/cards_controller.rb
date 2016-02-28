@@ -1,9 +1,10 @@
 module ApiFlashcards
   module Api
     module V1
-      class CardsController < ApiFlashcards::ApplicationController
+      class CardsController < ApiFlashcards::ApiController
         def index
-          render json: 'Test for cards', status: 200
+          @cards = current_user.cards.order(:review_date)
+          render json: @cards, status: 200
         end
 
         def create
