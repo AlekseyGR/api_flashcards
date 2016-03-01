@@ -8,7 +8,7 @@ module ApiFlashcards
         end
 
         def create
-          @card = current_user.build_card(card_params)
+          @card = current_user.cards.build(card_params)
           if @card.save
             render json: { message: 'success' }, status: :created
           else
