@@ -22,21 +22,8 @@ module ApiFlashcards
 
       context 'with correct credentials' do
         include_context 'correct credentials'
-        # let(:user) { FactoryGirl.create(:user) }
-        # let(:block) { FactoryGirl.create(:block) }
-        # let(:card) { FactoryGirl.create(:card) }
-        # before do
-        #   get :index, request.headers['Authorization'] = ActionController::HttpAuthentication::Basic.encode_credentials(user.email, user.password)
-        # end
-        it 'returns 200' do
-          # p ''
-          # p '*' * 120
-          # p "user = #{user.inspect}"
-          # p response.headers
-          # p "request.headers = #{ request.headers['Authorization'].inspect }"
-          # p ''
-          # p '*' * 120
 
+        it 'returns 200' do
           expect(response.status).to eq(200)
         end
       end
