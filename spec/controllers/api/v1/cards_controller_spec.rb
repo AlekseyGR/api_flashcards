@@ -7,9 +7,8 @@ module ApiFlashcards
     routes { ApiFlashcards::Engine.routes }
 
     describe '#index' do
-      before(:each) { get :index }
-
       context 'without credentials' do
+        before(:each) { get :index }
         it_behaves_like 'not autorized'
       end
 
@@ -26,7 +25,15 @@ module ApiFlashcards
         it 'returns 200' do
           expect(response.status).to eq(200)
         end
+
+        it 'returns card fields' do
+          expect(response.body).to include(card.to_json)
+        end
       end
+    end
+
+    describe '#create' do
+
     end
   end
 end
