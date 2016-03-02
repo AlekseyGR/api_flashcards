@@ -19,7 +19,6 @@ module ApiFlashcards
           if check_result[:state]
             handle_correct_answer(check_result[:distance])
           else
-            flash[:alert] = t(:incorrect_translation_alert)
             render json: { message: 'Incorrect answer' }, status: :ok
           end
         end
@@ -42,7 +41,7 @@ module ApiFlashcards
           if distance == 0
             render json: { message: 'Correct answer' }, status: :ok
           else
-            render json: { message: "You entered translation from misprint. Please try again" }, status: :ok
+            render json: { message: 'You entered translation from misprint. Please try again' }, status: :ok
           end
         end
       end

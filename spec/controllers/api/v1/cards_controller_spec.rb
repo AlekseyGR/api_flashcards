@@ -14,7 +14,8 @@ module ApiFlashcards
 
       context 'with wrong credentials' do
         before(:each) do
-          get :index, request.headers['Authorization'] = 'some@test.com, wrong_password'
+          request.headers['Authorization'] = 'some@test.com, wrong_password'
+          get :index
         end
         it_behaves_like 'not autorized'
       end
@@ -29,6 +30,10 @@ module ApiFlashcards
         it 'returns card fields' do
           expect(response.body).to include(card.to_json)
         end
+
+        it 'returns array of cards' do
+          expect(JSON.parse(response.body)).to be_a Array
+        end
       end
     end
 
@@ -40,13 +45,20 @@ module ApiFlashcards
 
       context 'with wrong credentials' do
         before(:each) do
-          post :create, request.headers['Authorization'] = 'some@test.com, wrong_password'
+          request.headers['Authorization'] = 'some@test.com, wrong_password'
+          post :create
         end
         it_behaves_like 'not autorized'
       end
 
       context 'with correct credentials' do
         include_context 'correct credentials'
+
+        before(:each) do
+          request.headers['Authorization'] =
+            ActionController::HttpAuthentication::Basic.encode_credentials(user.email, user.password)
+          post :create, params
+        end
 
         context 'with correct card params' do
           let(:params) do
@@ -58,13 +70,6 @@ module ApiFlashcards
               }
             }
           end
-
-          before(:each) do
-            request.headers['Authorization'] =
-              ActionController::HttpAuthentication::Basic.encode_credentials(user.email, user.password)
-            post :create, params
-          end
-
 
           it 'create card' do
             expect do
@@ -80,12 +85,6 @@ module ApiFlashcards
         end
 
         context 'with incorect card params' do
-          before(:each) do
-            request.headers['Authorization'] =
-              ActionController::HttpAuthentication::Basic.encode_credentials(user.email, user.password)
-            post :create, params
-          end
-
           it_behaves_like 'unprocessable entity', card: { original_text: 'Text', translated_text: 'Text', block_id: 1 }
           it_behaves_like 'unprocessable entity', card: { original_text: '', translated_text: 'Text', block_id: 1 }
           it_behaves_like 'unprocessable entity', card: { original_text: 'Text', translated_text: '', block_id: 1 }
