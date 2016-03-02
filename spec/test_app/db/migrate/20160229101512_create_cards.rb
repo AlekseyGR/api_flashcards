@@ -4,7 +4,7 @@ class CreateCards < ActiveRecord::Migration
       t.string  :original_text
       t.string  :translated_text
       t.date    :review_date
-      t.integer :user_id, null: false
+      t.integer :user_id,  null: false
       t.integer :block_id, null: false
 
       t.timestamp

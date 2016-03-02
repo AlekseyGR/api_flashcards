@@ -18,6 +18,8 @@ class Card < ActiveRecord::Base
     card
   end
 
+  def check_translation(translation); end
+
   protected
 
   def set_review_date_as_now
