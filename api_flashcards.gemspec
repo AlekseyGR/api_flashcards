@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '~> 4.2.5.1'
   s.add_dependency 'rails-api'
+  s.add_dependency 'apipie-rails'
 
   s.add_development_dependency 'pg'
 end
