@@ -2,6 +2,8 @@ module ApiFlashcards
   module Api
     module V1
       class ReviewController < ApiFlashcards::ApiController
+        api :GET, '/v1/review_card', 'Send card data for reviewing user'
+        param :id, Integer,  desc: 'Card id for send review card data'
         def index
           if params[:id]
             @card = current_user.cards.find(params[:id])
@@ -12,6 +14,9 @@ module ApiFlashcards
           render json: @card, status: :ok
         end
 
+        api :PUT, '/v1/review_card', 'Put data for check'
+        param :card_id, String, desc: 'Card id for check translation'
+        param :user_translation, String, desc: 'User translation'
         def review_card
           @card = current_user.cards.find(params[:card_id])
           check_result = @card.check_translation(review_params[:user_translation])

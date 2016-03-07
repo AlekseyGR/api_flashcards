@@ -10,6 +10,7 @@ require "sprockets/railtie"
 
 Bundler.require(*Rails.groups)
 require "api_flashcards"
+require 'apipie-rails'
 
 module TestApp
   class Application < Rails::Application

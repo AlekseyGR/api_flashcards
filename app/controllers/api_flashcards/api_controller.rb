@@ -1,8 +1,13 @@
 require 'rails-api'
+
 module ApiFlashcards
   class ApiController < ActionController::API
     include ActionController::HttpAuthentication::Basic::ControllerMethods
     before_action :authenticate_basic
+
+    resource_description do
+      api_version '1'
+    end
 
     protected
 
